@@ -1,14 +1,12 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 
 const Page = () => {
   const [responsedata, setResponse] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-
+  const [questions, setQuestion] = useState([]);
   const apiUrl = "http://localhost:3000/api/generateResponse";
-
-
 
   const generateQuestions = async () => {
     setLoading(true);
@@ -40,7 +38,7 @@ The response should be in the following JSON format and not string:
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userPrompt
+          userPrompt,
         }),
       });
       if (!response.ok) {
@@ -51,7 +49,7 @@ The response should be in the following JSON format and not string:
       const data = await response.json();
       console.log("API Response:", data);
       setResponse(data.final);
-      
+      setQuestion(data.final);
     } catch (error) {
       console.error("Error:", error);
       setError(error.message);
@@ -60,19 +58,23 @@ The response should be in the following JSON format and not string:
     }
   };
 
-  console.log(`response data: ${responsedata}`)
+  console.log(`response data: ${responsedata}`);
   return (
     <div>
       <button onClick={generateQuestions} disabled={loading}>
         {loading ? "Loading..." : "Generate Questions"}
       </button>
       {error && <p>Error: {error}</p>}
-      {responsedata && responsedata.length > 0 && (
-        <div>
-          <h2>Response from API:</h2>
-          <pre>{responsedata}</pre>
+      {questions?.map((question) => (
+        <div key={question.id} className="">
+          <h1>{question.question}</h1>
+          <select type="radio">
+            {question.options.map((option) => (
+              <option key={option}>{option}</option>
+            ))}
+          </select>
         </div>
-      )}
+      ))}
     </div>
   );
 };
