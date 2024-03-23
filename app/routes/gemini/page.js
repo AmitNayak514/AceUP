@@ -1,70 +1,21 @@
-"use client";
-
-// import React, { useState } from "react";
-
-// const page = () => {
-//   const [response, setResponse] = useState(null);
-//   const [error, setError] = useState(null);
-//   const [loading, setLoading] = useState(false);
-//   const [userPrompt, setUserPrompt] = useState(""); // Added for user input
-
-//   const fetchData = async () => {
-//     setLoading(true);
-//     try {
-//       const response = await fetch("/api/generateResponse", {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({ userPrompt }),
-//       });
-
-//       if (!response.ok) {
-//         throw new Error("Network response was not ok");
-//       }
-
-//       const data = await response.json();
-//       console.log(data);
-//       setResponse(data.res.kwargs.content);
-//       consolelog(response);// Adjusted to access model's response
-//     } catch (error) {
-//       setError(error.message);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <label htmlFor="userPrompt">Enter your prompt:</label>
-//       <button onClick={fetchData} disabled={loading}>
-//         {loading ? "Loading..." : "Generate Response"}
-//       </button>
-//       {error && <p>Error: {error}</p>}
-//       {response && (
-//         <div>
-//           <h2>Response from API:</h2>
-//           <pre>{response}</pre>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default page;
+"use client"
 import React, { useState } from "react";
 
 const Page = () => {
-  const [response, setResponse] = useState(null);
+  const [responsedata, setResponse] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const apiUrl = "http://localhost:3000/api/generateResponse";
+
+
 
   const generateQuestions = async () => {
     setLoading(true);
     try {
       const userPrompt = `You are quiz master, generate 5 easy to medium difficulty mcq questions.
-Also provide the answer separately.Return an arry of objects
-The response should be in the following JSON format:
+Also provide the answer separately.Return an arry of objects dont use markdown.
+The response should be in the following JSON format and not string:
 
 [
   {
@@ -88,22 +39,19 @@ The response should be in the following JSON format:
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userPrompt }),
+        body: JSON.stringify({
+          userPrompt
+        }),
       });
-
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
 
+      // get the response from the server
       const data = await response.json();
       console.log("API Response:", data);
-
-      // Check if response is an array before setting state
-      if (Array.isArray(data.res.kwargs.content)) {
-        setResponse(data.res.kwargs.content);
-      } else {
-        setError("Invalid response format. Please try again.");
-      }
+      setResponse(data.final);
+      
     } catch (error) {
       console.error("Error:", error);
       setError(error.message);
@@ -112,20 +60,17 @@ The response should be in the following JSON format:
     }
   };
 
+  console.log(`response data: ${responsedata}`)
   return (
     <div>
       <button onClick={generateQuestions} disabled={loading}>
         {loading ? "Loading..." : "Generate Questions"}
       </button>
       {error && <p>Error: {error}</p>}
-      {response && response.length > 0 && (
+      {responsedata && responsedata.length > 0 && (
         <div>
-          <h2>Generated Questions:</h2>
-          <form>
-            {response.map((question, index) => (
-              <div key={index}>{/* ... */}</div>
-            ))}
-          </form>
+          <h2>Response from API:</h2>
+          <pre>{responsedata}</pre>
         </div>
       )}
     </div>

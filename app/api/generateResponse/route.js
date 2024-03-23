@@ -44,8 +44,10 @@ export async function POST(req) {
 
   try {
     const res = await model.invoke([["human", userPrompt]]);
-    // console.log(res.content);
-    return NextResponse.json({ res }); // Return the model's response directly
+    // console.log(res);
+    // console.log(res.lc_kwargs.content);
+    const final = JSON.parse(res.lc_kwargs.content);
+    return NextResponse.json({ final}); // Return the model's response directly
   } catch (error) {
     return NextResponse.json({
       text: "Unable to process the prompt. Please try again.",
