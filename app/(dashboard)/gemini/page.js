@@ -2,14 +2,19 @@
 import React, { useState } from "react";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { db } from "@/firebase.config";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { useUser } from "@clerk/nextjs";
 const Page = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [questions, setQuestions] = useState([]);
   const [userAnswers, setUserAnswers] = useState({});
   const [showFeedback, setShowFeedback] = useState(false);
+  const [isTestCompleted, setIsTestCompleted] = useState(false);
+  const { user } = useUser();
   const apiUrl = "http://localhost:3000/api/generateResponse";
-
+  console.log(user);
   const generateQuestions = async () => {
     setLoading(true);
     try {
@@ -72,7 +77,7 @@ const Page = () => {
     setUserAnswers({ ...userAnswers, [questionId]: event.target.value });
   };
 
-  const assessScore = () => {
+  const assessScore = async () => {
     let score = 0;
     questions.forEach((question) => {
       if (question.answer === userAnswers[question.id]) {
@@ -80,9 +85,38 @@ const Page = () => {
       }
     });
 
+    try {
+      const userRef = await setDoc(doc(db, "users", user.id), {
+        id: user.id,
+        imageUrl: user.imageUrl,
+        name: user.fullName,
+        email: user.primaryEmailAddress?.emailAddress,
+        tests: [
+          {
+            questions: questions.map((question) => ({
+              qid: question.id,
+              timestamp: Date.now(),
+              questionText: question.question,
+              options: question.options,
+              chosenOption: userAnswers[question.id],
+              correctAnswer: question.answer,
+            })),
+          },
+        ],
+      });
+      console.log("added to firebase");
+    } catch (error) {
+      console.log("Error while storing data", error);
+    }
     setShowFeedback(true);
     console.log("Score:", score);
     console.log("Total Questions:", questions.length);
+    // .then(() => {
+    //   console.log("Document successfully written");
+    // })
+    // .catch((error) => {
+    //   console.error("Error while writing document:", error);
+    // });
   };
 
   const renderFeedback = () => {
@@ -90,8 +124,8 @@ const Page = () => {
       <div className="" key={question.id}>
         <p>{question.question}</p>
         <ul>
-          {question.options.map((option) => (
-            <li key={option}>
+          {question.options.map((option, index) => (
+            <li key={index}>
               {option} {userAnswers[question.id] === option && `(Your Choice)`}
               {question.answer === option && (
                 <span style={{ color: "green" }}>✅ Correct</span>
@@ -195,8 +229,11 @@ const Page = () => {
             ))}
             <Button
               // variant={"premium"}
+              onClick={() => {
+                setIsTestCompleted(true);
+                assessScore();
+              }}
               className="mt-4 text-2xl bg-gradient-to-br hover:from-[#fff] hover:to-[#fff]/10 hover:shadow-2xl hover:shadow-black transition duration-300 hover:text-[#333]/90 from-zinc-900 to-zinc-700 text-white px-8 py-6 font-bold tracking-wider rounded-lg"
-              onClick={assessScore}
             >
               CHECK SCORE
             </Button>
