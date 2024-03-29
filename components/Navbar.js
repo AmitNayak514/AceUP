@@ -22,7 +22,7 @@ const Navbar = async () => {
         <h1
           className={cn("text-2xl font-extrabold text-black", font.className)}
         >
-          Questify
+          AceUP
         </h1>
       </Link>
       {/* </div> */}

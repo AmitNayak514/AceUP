@@ -90,6 +90,11 @@ const page = () => {
 
     try {
       const userRef = await setDoc(doc(db, "users", user.id), {
+        id: user.id,
+        imageUrl: user.imageUrl,
+        name: user.fullName,
+        email: user.primaryEmailAddress?.emailAddress,
+        initialTest: true,
         tests: [
           {
             questions: questions.map((question) => ({

@@ -126,7 +126,6 @@ const Page = () => {
     router.push("/assesment");
   };
 
-
   return (
     <div className="p-12">
       <div className="shadow-2xl bg-white rounded-3xl p-16 ">

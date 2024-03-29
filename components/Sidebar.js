@@ -74,7 +74,7 @@ const Sidebar = () => {
         <div className="space-y-1">
           {routes.map((route) => (
             <Link
-              href={route.href}
+              href={"/dashboard"}
               key={route.href}
               className={cn(
                 "text-sm group flex p-3 w-full cursor-pointer justify-start font-medium hover:text-white hover:bg-white/10 rounded-lg transition",

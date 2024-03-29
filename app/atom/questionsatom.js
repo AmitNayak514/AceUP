@@ -2,10 +2,14 @@ import { atom } from "recoil";
 
 export const questionsState = atom({
   key: "questions",
-  default: [], 
+  default: [],
 });
 
 export const userAnswerState = atom({
   key: "userAnswer",
-  default: {}, 
+  default: {},
+});
+export const insightsState = atom({
+  key: "insights",
+  default: {},
 });
