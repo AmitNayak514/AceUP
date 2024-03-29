@@ -73,16 +73,19 @@ const TestPage = () => {
   useEffect(() => {
     const fetchPreviousTests = async () => {
       try {
-        const userRef = doc(db, "users", user.id);
-        const userDoc = await getDoc(userRef);
-        if (userDoc.exists()) {
-          const userData = userDoc.data();
-          if (userData.tests) {
-            setPreviousTests(userData.tests);
-          }
-        }
+        const userRef = await setDoc(doc(db, "users", user.id, "tests"), {
+          questions: questions.map((question) => ({
+            qid: question.id,
+            timestamp: Date.now(),
+            questionText: question.question,
+            options: question.options,
+            chosenOption: userAnswers[question.id],
+            correctAnswer: question.answer,
+          })),
+        });
+        console.log("added to firebase");
       } catch (error) {
-        console.error("Error fetching previous tests:", error);
+        console.log("Error while storing data", error);
       } finally {
         setLoading(false);
       }
