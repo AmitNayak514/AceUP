@@ -219,7 +219,7 @@ const Page = () => {
                 setIsTestCompleted(true);
                 assessScore();
               }}
-              className="mt-4 text-2xl bg-gradient-to-br hover:from-[#fff] hover:to-[#fff]/10 hover:shadow-2xl hover:shadow-black transition duration-300 hover:text-[#333]/90 from-zinc-900 to-zinc-700 text-white px-8 py-6 font-bold tracking-wider rounded-lg"
+              className="mt-4 text-2xl bg-gradient-to-br hover:from-[#fff] hover:to-[#fff]/10 hover:shadow-2xl hover:shadow-black/75 transition duration-300 hover:text-[#333]/90 from-zinc-900 to-zinc-700 text-white px-8 py-6 font-bold tracking-wider rounded-lg"
             >
               CHECK SCORE
             </Button>

@@ -1,6 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+
 import {
   FileQuestionIcon,
   TrendingUp,
@@ -11,6 +12,7 @@ import {
 import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import { UserButton, useUser } from "@clerk/nextjs";
 const montserrat = Montserrat({ weight: "600", subsets: ["latin"] });
 const routes = [
   {
@@ -57,15 +59,16 @@ const routes = [
 
 const Sidebar = () => {
   const pathname = usePathname();
+  const { user } = useUser();
   return (
     <div className="space-y-4 py-4 flex flex-col h-full bg-[#111827] text-white">
-      <div className="px-3 py-2 flex-1">
+      <div className="px-3 py-2 flex-1 overflow-y-auto">
         <Link href="/dashboard" className="flex items-center pl-3 mb-14">
           <div className="relative w-8 h-8 mr-4">
             <Image fill alt="Logo" src="/logo.png" />
           </div>
           <h1 className={cn("text-2xl font-bold", montserrat.className)}>
-            Questify
+            AceUP
           </h1>
         </Link>
         <div className="space-y-1">
@@ -88,6 +91,12 @@ const Sidebar = () => {
               </div>
             </Link>
           ))}
+        </div>
+      </div>
+      <div className="mx-4">
+        <div className="mt-auto px-2 my-2 py-2 flex gap-2 items-center  font-medium text-white/70 hover:bg-white/10 rounded-lg transition hover:text-white">
+          <UserButton />
+          <h1 className="text-sm">{user?.fullName}</h1>
         </div>
       </div>
     </div>
