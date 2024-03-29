@@ -123,7 +123,7 @@ const Page = () => {
     globalsetUserAnswers(userAnswers);
     console.log("Score:", score);
     console.log("Total Questions:", questions.length);
-    router.push("/gemini/assesment");
+    router.push("/assesment");
   };
 
 

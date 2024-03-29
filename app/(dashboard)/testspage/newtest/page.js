@@ -7,17 +7,8 @@ import { db } from "@/firebase.config";
 import { doc, getDoc } from "firebase/firestore";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-// import { JSONLoader } from "langchain/document_loaders/fs/json";
-// const loader = new JSONLoader("src/document_loaders/example_data/example.json");
+import { questionsState, userAnswerState } from "@/app/atom/questionsatom";
+import { useRecoilState } from "recoil";
 
 const page = () => {
   const router = useRouter();
@@ -31,6 +22,11 @@ const page = () => {
   const [loading, setLoading] = useState(false);
   const [showPreviousPerformance, setShowPreviousPerformance] = useState(false);
   const apiUrl = "http://localhost:3000/api/newtest";
+
+  const [globalquestion, globalsetQuestions] = useRecoilState(questionsState);
+  const [globaluserAnswers, globalsetUserAnswers] =
+    useRecoilState(userAnswerState);
+
   useEffect(() => {
     const fetchPreviousTests = async () => {
       try {
@@ -116,39 +112,13 @@ const page = () => {
     } catch (error) {
       console.log("Error while storing data", error);
     }
-    setShowFeedback(true);
+    globalsetQuestions(questions);
+    globalsetUserAnswers(userAnswers);
     console.log("Score:", score);
     console.log("Total Questions:", questions.length);
-    // .then(() => {
-    //   console.log("Document successfully written");
-    // })
-    // .catch((error) => {
-    //   console.error("Error while writing document:", error);
-    // });
+    router.push("/assesment");
   };
-  const renderFeedback = () => {
-    return questions.map((question) => (
-      <div className="" key={question.id}>
-        <p>{question.question}</p>
-        <ul>
-          {question.options.map((option, index) => (
-            <li key={index}>
-              {option} {userAnswers[question.id] === option && `(Your Choice)`}
-              {question.answer === option && (
-                <span style={{ color: "green" }}>✅ Correct</span>
-              )}
-              {question.answer !== option &&
-                userAnswers[question.id] === option && (
-                  <span style={{ color: "red" }}>❌ Incorrect</span>
-                )}
-            </li>
-          ))}
-        </ul>
-      </div>
-    ));
-  };
-  console.log(questions);
-  // console.log(previousTests);
+
   return (
     <div className="flex justify-center items-center p-16">
       <div className="shadow-2xl bg-white rounded-3xl p-16">
