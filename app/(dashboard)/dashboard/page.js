@@ -106,7 +106,7 @@ export default function DashBoardPage() {
         {tools.map((tool) => (
           <Card
             onClick={() => {
-              router.push(`${initialTestGiven ? "/testspage" : "/gemini"}`);
+              router.push(`${initialTestGiven ? "/mainTest" : "/initialTest"}`);
             }}
             key={tool.href}
             className="p-4 border-black/5 flex items-center w-full md:w-[55rem] justify-between hover:shadow-md transition cursor-pointer"

@@ -122,7 +122,7 @@ const TestPage = () => {
             <Button
               onClick={() => {
                 setShowPreviousPerformance(false);
-                router.push(`/testspage/newtest`);
+                router.push(`/mainTest/actualTest`);
               }}
               className="mt-4 ml-16 text-2xl bg-gradient-to-br hover:from-[#fff] hover:to-[#fff] hover:shadow-2xl hover:shadow-black/75 transition duration-300 hover:text-[#333]/90 from-zinc-900 to-zinc-700 text-white px-8 py-16 font-bold tracking-wider rounded-lg"
             >
