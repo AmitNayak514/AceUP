@@ -174,7 +174,7 @@ const Page = () => {
         {questions?.length > 0 && (
           <div>
             {questions.map((question, index) => (
-              <div key={question.id} className="">
+              <div key={`${question.id}`} className="">
                 <h1 className=" font-bold text-[#333333]/95 text-xl mb-2">
                   {index + 1}. {question.question}
                 </h1>
@@ -185,7 +185,7 @@ const Page = () => {
                   >
                     <input
                       type="radio"
-                      id={option}
+                      id={`${question.id}-${option}`}
                       name={question.id}
                       value={option}
                       onChange={handleOptionChange}
@@ -195,7 +195,7 @@ const Page = () => {
                     />
                     {/* <label htmlFor={option} >{option}</label> */}
                     <label
-                      htmlFor={option}
+                      htmlFor={`${question.id}-${option}`}
                       className="inline-block w-full rounded-md px-4 py-2 cursor-pointer"
                     >
                       <span className="inline-block">

@@ -17,12 +17,11 @@ const page = () => {
   const apiUrl = "http://localhost:3000/api/generateResponse";
   useEffect(() => {
     const getAssessment = async () => {
-      try {
-        const userPrompt = `You are a adaptive quiz learning app currently used for subjects DBMS,DSA and Networking.Based on give the performance of the student in the test, You have to anaylyze the strengths, weaknesses and capabilties of the student and also create strategies for imporvemnet of the student and also provide when he should take the next test. This is the test data of the student. Questions: ${JSON.stringify(
-          questions
-        )}, Student's answer: ${JSON.stringify(
-          userAnswers
-        )}. Give the output in JSON format. All the Object Keys Shall be arrays of strings of the points of the content. This shall be the format. This is just an example..keep the same structure:
+      const userPrompt = `You are a adaptive quiz learning app currently used for subjects DBMS,DSA and Networking.Based on give the performance of the student in the test, You have to anaylyze the strengths, weaknesses and capabilties of the student and also create strategies for imporvemnet of the student and also provide when he should take the next test. This is the test data of the student. Questions: ${JSON.stringify(
+        questions
+      )}, Student's answer: ${JSON.stringify(
+        userAnswers
+      )}. Give the output in JSON format. All the Object Keys Shall be arrays of strings of the points of the content. This shall be the format. This is just an example..keep the same structure:
         {
           "strengths": [
               "...","...",...
@@ -37,28 +36,25 @@ const page = () => {
       }
         
         `;
-        const response = await fetch(apiUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ userPrompt }),
-        });
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userPrompt }),
+      });
 
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-
-        const data = await response.json();
-        const jsonString = data.res.kwargs.content
-          .replace(/```json/, "") // Remove opening code block indicator
-          .replace(/```/, "") // Remove closing code block indicator
-          .trim(); // Remove leading/trailing whitespace
-        const parsedData = JSON.parse(jsonString);
-        setInsights(parsedData);
-      } catch (error) {
-        console.error("Error:", error);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
       }
+
+      const data = await response.json();
+      const jsonString = data.res.kwargs.content
+        .replace(/```json/, "") // Remove opening code block indicator
+        .replace(/```/, "") // Remove closing code block indicator
+        .trim(); // Remove leading/trailing whitespace
+      const parsedData = JSON.parse(jsonString);
+      setInsights(parsedData);
     };
     getAssessment();
   }, []);
