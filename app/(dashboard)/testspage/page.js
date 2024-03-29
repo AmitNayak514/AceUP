@@ -9,7 +9,7 @@ import { doc, getDoc } from "firebase/firestore";
 
 const PerformanceReport = ({ tests }) => {
   return (
-    <div className="mt-8">
+    <div className="mt-8 ">
       <h2 className="text-3xl font-bold mb-4">Previous Test Performance :</h2>
       {tests.map((test, index) => (
         <Card key={index} className="mb-4  p-16">

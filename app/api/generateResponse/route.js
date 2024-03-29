@@ -1,4 +1,4 @@
-// import { NextRequest, NextResponse } from "next/server";
+  // import { NextRequest, NextResponse } from "next/server";
 // import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 
 // export async function POST(req) {

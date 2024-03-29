@@ -6,9 +6,17 @@ import { db } from "@/firebase.config";
 import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { useUser } from "@clerk/nextjs";
 import { useAuth } from "@clerk/nextjs";
+import { useRecoilState } from "recoil";
+import { questionsState, userAnswerState } from "@/app/atom/questionsatom";
+import { useRouter } from "next/navigation";
+
 const Page = () => {
+  const router = useRouter();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [globalquestion, globalsetQuestions] = useRecoilState(questionsState);
+  const [globaluserAnswers, globalsetUserAnswers] =
+    useRecoilState(userAnswerState);
   const [questions, setQuestions] = useState([]);
   const [userAnswers, setUserAnswers] = useState({});
   const [showFeedback, setShowFeedback] = useState(false);
@@ -110,38 +118,14 @@ const Page = () => {
     } catch (error) {
       console.log("Error while storing data", error);
     }
-    setShowFeedback(true);
+    // setShowFeedback(true);
+    globalsetQuestions(questions);
+    globalsetUserAnswers(userAnswers);
     console.log("Score:", score);
     console.log("Total Questions:", questions.length);
-    // .then(() => {
-    //   console.log("Document successfully written");
-    // })
-    // .catch((error) => {
-    //   console.error("Error while writing document:", error);
-    // });
+    router.push("/gemini/assesment");
   };
 
-  const renderFeedback = () => {
-    return questions.map((question) => (
-      <div className="" key={question.id}>
-        <p>{question.question}</p>
-        <ul>
-          {question.options.map((option, index) => (
-            <li key={index}>
-              {option} {userAnswers[question.id] === option && `(Your Choice)`}
-              {question.answer === option && (
-                <span style={{ color: "green" }}>✅ Correct</span>
-              )}
-              {question.answer !== option &&
-                userAnswers[question.id] === option && (
-                  <span style={{ color: "red" }}>❌ Incorrect</span>
-                )}
-            </li>
-          ))}
-        </ul>
-      </div>
-    ));
-  };
 
   return (
     <div className="p-12">
