@@ -13,7 +13,11 @@ const LandingHero = () => {
         <div className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
           <TypeWriterComponent
             options={{
-              strings: ["YouTube Summary", "Content Analysis", "Q&A Summary"],
+              strings: [
+                "Adaptive Learning",
+                "Continuous Improvement",
+                "Personalized Assessment",
+              ],
               autoStart: true,
               loop: true,
             }}
@@ -21,7 +25,7 @@ const LandingHero = () => {
         </div>
       </div>
       <div className="text-sm md:text-xl font-light text-zinc-400">
-        Elevating YouTube Learning: Simplified, Personalized, Visualized.
+        Elevate Your Learning: Simplified, Personalized, Visualized
       </div>
       <div className="">
         <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>

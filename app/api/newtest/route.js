@@ -17,9 +17,8 @@ export async function POST(req) {
   const { userId } = getAuth(req);
   const { sessionId } = getAuth(req);
   const reqBody = await req.json();
-  const { previousTests } = reqBody;
+  const { previousTests, subject } = reqBody;
   const previousHistory = JSON.stringify(previousTests);
-  // console.log(previousHistory);
   if (!userId) {
     return NextResponse.status(401).json({ error: "Not authenticated" });
   }
@@ -43,7 +42,6 @@ export async function POST(req) {
   const model = new ChatGoogleGenerativeAI({
     apiKey: process.env.GOOGLE_API_KEY,
     modelName: "gemini-pro",
-    maxOutputTokens: 2048,
   });
   const memory = new BufferMemory({
     chatHistory: new FirestoreChatMessageHistory({
@@ -63,7 +61,7 @@ export async function POST(req) {
       },
     }),
   });
-  const inputPrompt = `You are adaptive test generator, generate 15 medium difficulty mcq questions of the subject DSA.
+  const inputPrompt = `You are adaptive test generator, generate 15 medium difficulty mcq questions of the subject ${subject}.
   Also provide the answer separately.Also you are aim to better the performance of the student , so on the basis of the previous provided performance of the student which is ${previousHistory}, generate question by varying the difficulty with a criteria that if the student score less then 50% in a test, the difficulty of the test should decrease and if scores more, then increase. Also avoid repition of questions that are already marked correct by student and learn from previous chat history. Return an array of objects don't use markdown.The options of one question should not match strictly with any other options and there should only be four options
   The response should be in the following JSON format and not string  it should be strictly as per the format:
   [
@@ -88,6 +86,5 @@ export async function POST(req) {
     memory,
   });
   const response = await chain.call({ input: inputPrompt });
-  console.log({ response });
   return NextResponse.json({ response });
 }

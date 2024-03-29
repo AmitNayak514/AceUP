@@ -20,7 +20,7 @@ const LandingNavbar = () => {
           <Image fill src={"/logo.png"} alt="logo" />
         </div>
         <h1 className={cn("text-2xl font-bold text-white", font.className)}>
-          Questify
+          AceUP
         </h1>
       </Link>
       <div className="flex items-center gap-x-2">
