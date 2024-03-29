@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Card } from "@/components/ui/card";
 import { db } from "@/firebase.config";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const PerformanceReport = ({ tests }) => {
   return (
@@ -73,19 +73,16 @@ const TestPage = () => {
   useEffect(() => {
     const fetchPreviousTests = async () => {
       try {
-        const userRef = await setDoc(doc(db, "users", user.id, "tests"), {
-          questions: questions.map((question) => ({
-            qid: question.id,
-            timestamp: Date.now(),
-            questionText: question.question,
-            options: question.options,
-            chosenOption: userAnswers[question.id],
-            correctAnswer: question.answer,
-          })),
-        });
-        console.log("added to firebase");
+        const userRef = doc(db, "users", user.id);
+        const userDoc = await getDoc(userRef);
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          if (userData.tests) {
+            setPreviousTests(userData.tests);
+          }
+        }
       } catch (error) {
-        console.log("Error while storing data", error);
+        console.error("Error fetching previous tests:", error);
       } finally {
         setLoading(false);
       }

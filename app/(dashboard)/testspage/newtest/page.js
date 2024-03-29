@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import { db } from "@/firebase.config";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { questionsState, userAnswerState } from "@/app/atom/questionsatom";
@@ -90,11 +90,6 @@ const page = () => {
 
     try {
       const userRef = await setDoc(doc(db, "users", user.id), {
-        id: user.id,
-        imageUrl: user.imageUrl,
-        name: user.fullName,
-        email: user.primaryEmailAddress?.emailAddress,
-        initialTest: true,
         tests: [
           {
             questions: questions.map((question) => ({
