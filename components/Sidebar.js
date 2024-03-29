@@ -2,13 +2,11 @@
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import {
-  CodeIcon,
-  ImageIcon,
-  LayoutDashboard,
-  MessageSquare,
-  MusicIcon,
-  SettingsIcon,
-  VideoIcon,
+  FileQuestionIcon,
+  TrendingUp,
+  NewspaperIcon,
+  BookOpen,
+  Users2,
 } from "lucide-react";
 import { Montserrat } from "next/font/google";
 import Image from "next/image";
@@ -16,34 +14,44 @@ import Link from "next/link";
 const montserrat = Montserrat({ weight: "600", subsets: ["latin"] });
 const routes = [
   {
-    label: "Dashboard",
-    icon: LayoutDashboard,
-    href: "/dashboard",
-    color: "text-sky-500",
-  },
-  {
-    label: "Summary Generation",
-    icon: MessageSquare,
-    href: "/summary",
+    label: "Personalized Test",
+    icon: FileQuestionIcon,
+    desc: "Take adaptive tests tailored to your learning pace and needs.",
     color: "text-violet-500",
+    bgColor: "text-violet-500/10",
+    href: "/personalized-test",
   },
   {
-    label: "Ask Questions",
-    icon: ImageIcon,
-    href: "/summary",
-    color: "text-pink-500",
+    label: "Performance Insights",
+    icon: NewspaperIcon,
+    desc: "Get detailed insights into your test performance and areas for improvement.",
+    color: "text-orange-700",
+    bgColor: "text-orange-700/10",
+    href: "/performance-insights",
   },
   {
-    label: "Audio Generation",
-    icon: MusicIcon,
-    href: "/#",
-    color: "text-emerald-500",
-  },
-  {
-    label: "Customer Support",
-    icon: SettingsIcon,
-    href: "/#",
+    label: "Progress Tracking",
+    icon: TrendingUp,
+    desc: "Track your progress over time and set goals for improvement.",
     color: "text-green-700",
+    bgColor: "text-green-700/10",
+    href: "/progress-tracking",
+  },
+  {
+    label: "Study Materials",
+    icon: BookOpen,
+    desc: "Access a library of study materials and resources to enhance your learning.",
+    color: "text-blue-700",
+    bgColor: "text-blue-700/10",
+    href: "/study-materials",
+  },
+  {
+    label: "Community Forums",
+    icon: Users2,
+    desc: "Engage with peers and experts in community forums for collaborative learning.",
+    color: "text-indigo-700",
+    bgColor: "text-indigo-700/10",
+    href: "/community-forums",
   },
 ];
 

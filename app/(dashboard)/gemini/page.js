@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { db } from "@/firebase.config";
 import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { useUser } from "@clerk/nextjs";
+import { useAuth } from "@clerk/nextjs";
 const Page = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -14,12 +15,12 @@ const Page = () => {
   const [isTestCompleted, setIsTestCompleted] = useState(false);
   const { user } = useUser();
   const apiUrl = "http://localhost:3000/api/generateResponse";
-  console.log(user);
+  // console.log(user);
   const generateQuestions = async () => {
     setLoading(true);
     try {
       const userPrompt = `You are quiz master, generate 15 easy to medium difficulty mcq questions. of DSA , DBMS and Networking.
-        Also provide the answer separately. Return an array of objects don't use markdown.
+        Also provide the answer separately. Return an array of objects don't use markdown.The options of one question should not match strictly with any other options and there should only be four options
         The response should be in the following JSON format and not string  it should be strictly as per the format:
         [
           {
@@ -51,7 +52,7 @@ const Page = () => {
       }
 
       const data = await response.json();
-      console.log("API Response:", data);
+      // console.log("API Response:", data);
 
       // Extracting the JSON string and removing code block indicators and whitespace
       const jsonString = data.res.kwargs.content
@@ -91,6 +92,7 @@ const Page = () => {
         imageUrl: user.imageUrl,
         name: user.fullName,
         email: user.primaryEmailAddress?.emailAddress,
+        initialTest: true,
         tests: [
           {
             questions: questions.map((question) => ({

@@ -1,80 +1,104 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
-  ArrowRight,
-  Headphones,
-  CodeIcon,
-  ImageIcon,
-  MessageSquare,
-  Music,
-  VideoIcon,
-  Search,
+  FileQuestionIcon,
+  TrendingUp,
+  NewspaperIcon,
+  BookOpen,
+  Users2,
 } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/firebase.config";
 // import { useRecoilState } from "recoil";
 // import { urlState } from "../atom/urlatom";
 const tools = [
   {
-    label: "Questions and Answers",
-    icon: MessageSquare,
-    desc: "Efficient learning with smart Q&A for precise information retrieval.",
+    label: "Personalized Test",
+    icon: FileQuestionIcon,
+    desc: "Take adaptive tests tailored to your learning pace and needs.",
     color: "text-violet-500",
     bgColor: "text-violet-500/10",
-    href: "/conversation",
+    href: "/personalized-test",
   },
-  //   {
-  //     label: "Audio Analysis",
-  //     icon: Music,
-  //     desc: "Improved learning with audio cues for a comprehensive educational experience.",
-  //     color: "text-emerald-500",
-  //     bgColor: "text-emerald-500/10",
-  //     href: "/music",
-  //   },
-  //   {
-  //     label: "Video Analysis",
-  //     icon: ImageIcon,
-  //     color: "text-pink-700",
-  //     bgColor: "text-pink-700/10",
-  //     href: "/image",
-  //   },
   {
-    label: "Access YouTube Videos",
-    icon: VideoIcon,
-    desc: "Direct access to diverse educational content through seamless YouTube integration.",
+    label: "Performance Insights",
+    icon: NewspaperIcon,
+    desc: "Get detailed insights into your test performance and areas for improvement.",
     color: "text-orange-700",
     bgColor: "text-orange-700/10",
-    href: "/video",
+    href: "/performance-insights",
   },
   {
-    label: "Customer Support",
-    icon: Headphones,
-    desc: "Instant tech support via chatbot, ensuring a smooth learning experience.",
+    label: "Progress Tracking",
+    icon: TrendingUp,
+    desc: "Track your progress over time and set goals for improvement.",
     color: "text-green-700",
     bgColor: "text-green-700/10",
-    href: "/code",
+    href: "/progress-tracking",
+  },
+  {
+    label: "Study Materials",
+    icon: BookOpen,
+    desc: "Access a library of study materials and resources to enhance your learning.",
+    color: "text-blue-700",
+    bgColor: "text-blue-700/10",
+    href: "/study-materials",
+  },
+  {
+    label: "Community Forums",
+    icon: Users2,
+    desc: "Engage with peers and experts in community forums for collaborative learning.",
+    color: "text-indigo-700",
+    bgColor: "text-indigo-700/10",
+    href: "/community-forums",
   },
 ];
 export default function DashBoardPage() {
   // const [url, setURL] = useRecoilState(urlState);
   const router = useRouter();
-
+  const [initialTestGiven, setInitialTestGiven] = useState(false);
+  const { user } = useUser();
+  useEffect(() => {
+    const checkInitialTestGiven = async () => {
+      if (user) {
+        const userRef = doc(db, "users", user.id);
+        const userDoc = await getDoc(userRef);
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          if (userData.initialTest) {
+            setInitialTestGiven(true);
+            console.log("initial test is given");
+          } else {
+            setInitialTestGiven(false);
+            console.log("Initial test not given");
+          }
+        }
+      }
+    };
+    checkInitialTestGiven();
+  });
+  console.log(initialTestGiven);
   return (
     <div className="p-4 md:p-8 lg:p-12">
       <div className="mb-8 space-y-4">
         <div className="text-center mt-8">
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold">
-            <span className="text-[#333333]">Explore the Power of</span>
-            <span className="text-[#FF0204]"> AI.</span>
+            <span className="text-[#333333]">Welcome to Your</span>
+            <span className="font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-transparent bg-clip-text">
+              {" "}
+              Adaptive Test App.{" "}
+            </span>
           </h1>
         </div>
         <p className="text-muted-foreground font-light text-sm md:text-lg text-center">
-          Elevate Your Learning Experience with AI-Driven Conversations and
-          Insights.
+          Personalized Tests, Detailed Insights, and Community Support for
+          Better Learning.
         </p>
       </div>
 
@@ -82,7 +106,7 @@ export default function DashBoardPage() {
         {tools.map((tool) => (
           <Card
             onClick={() => {
-              router.push(`${tool.href}`);
+              router.push(`${initialTestGiven ? "/testspage" : "/gemini"}`);
             }}
             key={tool.href}
             className="p-4 border-black/5 flex items-center w-full md:w-[55rem] justify-between hover:shadow-md transition cursor-pointer"
