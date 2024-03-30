@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
-
+import { useState, useEffect } from "react";
 import {
   FileQuestionIcon,
   TrendingUp,
@@ -13,6 +13,8 @@ import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { UserButton, useUser } from "@clerk/nextjs";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/firebase.config";
 const montserrat = Montserrat({ weight: "600", subsets: ["latin"] });
 const routes = [
   {
@@ -21,7 +23,7 @@ const routes = [
     desc: "Take adaptive tests tailored to your learning pace and needs.",
     color: "text-violet-500",
     bgColor: "text-violet-500/10",
-    href: "/personalized-test",
+    href: "/initialTest",
   },
   {
     label: "Performance Insights",
@@ -29,7 +31,7 @@ const routes = [
     desc: "Get detailed insights into your test performance and areas for improvement.",
     color: "text-orange-700",
     bgColor: "text-orange-700/10",
-    href: "/performance-insights",
+    href: "/initialTest",
   },
   {
     label: "Progress Tracking",
@@ -37,7 +39,7 @@ const routes = [
     desc: "Track your progress over time and set goals for improvement.",
     color: "text-green-700",
     bgColor: "text-green-700/10",
-    href: "/progress-tracking",
+    href: "/initialTest",
   },
   {
     label: "Study Materials",
@@ -45,7 +47,7 @@ const routes = [
     desc: "Access a library of study materials and resources to enhance your learning.",
     color: "text-blue-700",
     bgColor: "text-blue-700/10",
-    href: "/study-materials",
+    href: "/initialTest",
   },
   {
     label: "Community Forums",
@@ -53,11 +55,31 @@ const routes = [
     desc: "Engage with peers and experts in community forums for collaborative learning.",
     color: "text-indigo-700",
     bgColor: "text-indigo-700/10",
-    href: "/community-forums",
+    href: "/community",
   },
 ];
-
 const Sidebar = () => {
+  const [initialTestGiven, setInitialTestGiven] = useState(false);
+  useEffect(() => {
+    const checkInitialTestGiven = async () => {
+      if (user) {
+        const userRef = doc(db, "users", user.id);
+        const userDoc = await getDoc(userRef);
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          if (userData.initialTest) {
+            setInitialTestGiven(true);
+            console.log("initial test is given");
+          } else {
+            setInitialTestGiven(false);
+            console.log("Initial test not given");
+          }
+        }
+      }
+    };
+    checkInitialTestGiven();
+  });
+
   const pathname = usePathname();
   const { user } = useUser();
   return (

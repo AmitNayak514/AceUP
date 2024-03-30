@@ -187,7 +187,7 @@ const page = () => {
                   >
                     <input
                       type="radio"
-                      id={option}
+                      id={`${question.id}-${option}`}
                       name={question.id}
                       value={option}
                       onChange={handleOptionChange}
@@ -197,7 +197,7 @@ const page = () => {
                     />
                     {/* <label htmlFor={option} >{option}</label> */}
                     <label
-                      htmlFor={option}
+                      htmlFor={`${question.id}-${option}`}
                       className="inline-block w-full rounded-md px-4 py-2 cursor-pointer"
                     >
                       <span className="inline-block">
