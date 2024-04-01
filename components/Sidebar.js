@@ -8,6 +8,7 @@ import {
   NewspaperIcon,
   BookOpen,
   Users2,
+  Headphones,
 } from "lucide-react";
 import { Montserrat } from "next/font/google";
 import Image from "next/image";
@@ -41,14 +42,14 @@ const routes = [
     bgColor: "text-green-700/10",
     href: "/initialTest",
   },
-  {
-    label: "Study Materials",
-    icon: BookOpen,
-    desc: "Access a library of study materials and resources to enhance your learning.",
-    color: "text-blue-700",
-    bgColor: "text-blue-700/10",
-    href: "/initialTest",
-  },
+  // {
+  //   label: "Study Materials",
+  //   icon: BookOpen,
+  //   desc: "Access a library of study materials and resources to enhance your learning.",
+  //   color: "text-blue-700",
+  //   bgColor: "text-blue-700/10",
+  //   href: "/initialTest",
+  // },
   {
     label: "Community Forums",
     icon: Users2,
@@ -56,6 +57,14 @@ const routes = [
     color: "text-indigo-700",
     bgColor: "text-indigo-700/10",
     href: "/community",
+  },
+  {
+    label: "Customer Support",
+    icon: Headphones,
+    desc: "Instant tech support via chatbot, ensuring a smooth learning experience.",
+    color: "text-green-700",
+    bgColor: "text-purple-700/10",
+    href: "/dashboard",
   },
 ];
 const Sidebar = () => {
@@ -96,13 +105,19 @@ const Sidebar = () => {
         <div className="space-y-1">
           {routes.map((route) => (
             <Link
-              href={"/dashboard"}
+              href={
+                route.href === "/community"
+                  ? "/community"
+                  : initialTestGiven
+                  ? "/mainTest"
+                  : "/initialTest"
+              }
               key={route.href}
               className={cn(
-                "text-sm group flex p-3 w-full cursor-pointer justify-start font-medium hover:text-white hover:bg-white/10 rounded-lg transition",
-                pathname === route.href
-                  ? "text-white bg-white/10"
-                  : "text-zinc-400"
+                "text-sm group flex p-3 w-full cursor-pointer justify-start font-medium hover:text-white hover:bg-white/10 rounded-lg transition"
+                // pathname === route.href
+                //   ? "text-white bg-white/10"
+                //   : "text-zinc-400"
               )}
             >
               <div className="flex items-center flex-1">

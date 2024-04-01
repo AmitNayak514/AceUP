@@ -9,6 +9,7 @@ import {
   NewspaperIcon,
   BookOpen,
   Users2,
+  Headphones,
 } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
@@ -40,23 +41,31 @@ const tools = [
     desc: "Track your progress over time and set goals for improvement.",
     color: "text-green-700",
     bgColor: "text-green-700/10",
-    href: "/progress-tracking",
+    href: "/",
   },
-  {
-    label: "Study Materials",
-    icon: BookOpen,
-    desc: "Access a library of study materials and resources to enhance your learning.",
-    color: "text-blue-700",
-    bgColor: "text-blue-700/10",
-    href: "/study-materials",
-  },
+  // {
+  //   label: "Study Materials",
+  //   icon: BookOpen,
+  //   desc: "Access a library of study materials and resources to enhance your learning.",
+  //   color: "text-blue-700",
+  //   bgColor: "text-blue-700/10",
+  //   href: "/study-materials",
+  // },
   {
     label: "Community Forums",
     icon: Users2,
     desc: "Engage with peers and experts in community forums for collaborative learning.",
     color: "text-indigo-700",
     bgColor: "text-indigo-700/10",
-    href: "/community-forums",
+    href: "/community",
+  },
+  {
+    label: "Customer Support",
+    icon: Headphones,
+    desc: "Instant tech support via chatbot, ensuring a smooth learning experience.",
+    color: "text-green-700",
+    bgColor: "text-purple-700/10",
+    href: "/dashboard",
   },
 ];
 export default function DashBoardPage() {
@@ -106,7 +115,15 @@ export default function DashBoardPage() {
         {tools.map((tool) => (
           <Card
             onClick={() => {
-              router.push(`${initialTestGiven ? "/mainTest" : "/initialTest"}`);
+              router.push(
+                `${
+                  tool.href === "/community"
+                    ? "/community"
+                    : initialTestGiven
+                    ? "/mainTest"
+                    : "/initialTest"
+                }`
+              );
             }}
             key={tool.href}
             className="p-4 border-black/5 flex items-center w-full md:w-[55rem] justify-between hover:shadow-md transition cursor-pointer"

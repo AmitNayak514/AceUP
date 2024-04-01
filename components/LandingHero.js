@@ -9,7 +9,7 @@ const LandingHero = () => {
   return (
     <div className="text-white py-36 font-bold text-center space-y-5">
       <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl  space-y-5 font-extrabold">
-        <h1>The Best AI tool For</h1>
+        <h1>The Best Test Application For</h1>
         <div className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
           <TypeWriterComponent
             options={{
@@ -33,13 +33,13 @@ const LandingHero = () => {
             variant={"premium"}
             className="md:text-lg p-4 md:p-6 rounded-full font-semibold"
           >
-            Start Using for Free
+            Take A Test
           </Button>
         </Link>
       </div>
-      <div className="text-zinc-400 text-xs md:text-sm font-normal">
+      {/* <div className="text-zinc-400 text-xs md:text-sm font-normal">
         No Payment required.
-      </div>
+      </div> */}
       <LandingContent />
     </div>
   );
