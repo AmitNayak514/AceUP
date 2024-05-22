@@ -22,7 +22,7 @@ const Page = () => {
   const [showFeedback, setShowFeedback] = useState(false);
   const [isTestCompleted, setIsTestCompleted] = useState(false);
   const { user } = useUser();
-  const apiUrl = "http://localhost:3000/api/generateResponse";
+  const apiUrl = "/api/generateResponse";
   // console.log(user);
   const retrieveResponse = () => {
     const response = fetch("http://localhost:5000", {

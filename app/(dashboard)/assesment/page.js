@@ -14,7 +14,7 @@ const page = () => {
   const [userAnswers] = useRecoilState(userAnswerState);
   const [questions] = useRecoilState(questionsState);
   const [insights, setInsights] = useRecoilState(insightsState);
-  const apiUrl = "http://localhost:3000/api/generateResponse";
+  const apiUrl = "/api/generateResponse";
   useEffect(() => {
     const getAssessment = async () => {
       const userPrompt = `You are a adaptive quiz learning app currently used for subjects DBMS,DSA and Networking.Based on give the performance of the student in the test, You have to anaylyze the strengths, weaknesses and capabilties of the student and also create strategies for imporvemnet of the student and also provide when he should take the next test. This is the test data of the student. Questions: ${JSON.stringify(

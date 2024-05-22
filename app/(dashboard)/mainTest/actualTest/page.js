@@ -21,7 +21,7 @@ const page = () => {
   const [userAnswers, setUserAnswers] = useState({});
   const [loading, setLoading] = useState(false);
   const [showPreviousPerformance, setShowPreviousPerformance] = useState(false);
-  const apiUrl = "http://localhost:3000/api/newtest";
+  const apiUrl = "/api/newtest";
 
   const [globalquestion, globalsetQuestions] = useRecoilState(questionsState);
   const [globaluserAnswers, globalsetUserAnswers] =
