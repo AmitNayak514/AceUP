@@ -24,6 +24,14 @@ const Page = () => {
   const { user } = useUser();
   const apiUrl = "http://localhost:3000/api/generateResponse";
   // console.log(user);
+  const retrieveResponse = () => {
+    const response = fetch("http://localhost:5000", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
   const generateQuestions = async () => {
     setLoading(true);
     try {

@@ -75,7 +75,7 @@ const Post = ({ post, id }) => {
   }
 
   return (
-    <div className="flex p-3 cursor-pointer border-b">
+    <div className="flex p-3 cursor-pointer">
       <img
         className="h-12 w-12 rounded-full mr-4"
         src={post?.data()?.img}

@@ -31,9 +31,9 @@ const Feed = () => {
   }, []);
 
   return (
-    <div className=" flex-grow px-28 ">
-      <div className="shadow-xl shadow-black/60">
-        <div className="flex px-2 py-3 top-0 z-50 border-b border-gray-200 sticky bg-white">
+    <div className="flex-grow px-28">
+      <div className="mt-8 shadow-xl shadow-black/60 rounded-xl ">
+        <div className="flex px-2 py-3 top-0 z-50  sticky">
           <div
             className="text-lg sm:text-xl flex items-center ml-2 font-bold cursor-pointer"
             onClick={() => {

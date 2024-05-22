@@ -110,8 +110,8 @@ const page = () => {
               <li key={index}>{strategy}</li>
             ))}
           </ul>
-          <p className="text-xl font-bold mb-2">Next Test Recommendation:</p>
-          <p>{insights.next_test_date}</p>
+          {/* <p className="text-xl font-bold mb-2">Next Test Recommendation:</p>
+          <p>{insights.next_test_date}</p> */}
         </div>
       ) : (
         <div className="flex items-center justify-center">
