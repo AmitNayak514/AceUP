@@ -79,18 +79,21 @@ Screenshots showcasing the backend infrastructure.
 1. Clone the repository
    ```bash
    git clone https://github.com/yourusername/aceup-project.git
-   cd aceup-project```
+   cd aceup-project
+   ```
 
 2. Install dependencies
    ```bash
-   npm install```
+   npm install
+   ```
 
 3. Set up the .env similar to envexample file
 
 
 4. Run the development server
    ```bash
-   npm run dev```
+   npm run dev
+   ```
 
 5. Open http://localhost:3000 in your browser.
 
