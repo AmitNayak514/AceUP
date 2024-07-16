@@ -1,12 +1,12 @@
 # AceUP - Adaptive Quiz Learning Platform
 
-![AceUP Logo](/public/experience/aceup/aceup-logo.png)
+![AceUP Logo](readme/aceup-logo.png)
 
 ## Overview
 
 AceUP is an innovative adaptive quiz learning platform designed to analyze student performance and provide personalized insights and improvement strategies. Our platform focuses on enhancing the learning experience for students in subjects like DBMS, DSA, and Networking.
 
-![AceUP Screenshot](/public/experience/aceup/landing.png)
+![AceUP Screenshot](readme/landing.png)
 
 ## Features
 
@@ -25,36 +25,36 @@ AceUP is an innovative adaptive quiz learning platform designed to analyze stude
 ## Project Pages
 
 ### Landing Page
-![Landing Page](/public/experience/aceup/landing.png)
+![Landing Page](readme/landing.png)
 The main entry point for users, providing an overview of the platform's features and benefits.
 
 ### Authentication Pages
-![Login Page](/public/experience/aceup/login.png)
-![Register Page](/public/experience/aceup/register.png)
+![Login Page](readme/login.png)
+![Register Page](readme/register.png)
 Pages for user authentication including login, registration, and profile management.
 
 ### Main Dashboard
-![Dashboard](/public/experience/aceup/dashboard.png)
+![Dashboard](readme/dashboard.png)
 A central hub explaining various features of the application.
 
 ### Diagnostics Test Page
-![Diagnostics Test](/public/experience/aceup/diagnostic.png)
+![Diagnostics Test](readme/diagnostic.png)
 An initial test to assess the student's current level and performance.
 
 ### Main Test Page
-![Main Test](/public/experience/aceup/mainTest2.png)
+![Main Test](readme/mainTest2.png)
 The main interface for adaptive quizzes in DBMS, DSA, and Networking.
 
 ### Assessments and Insights
-![Assessments and Insights](/public/experience/aceup/assessment2.png)
+![Assessments and Insights](readme/assessment2.png)
 A detailed evaluation of quiz performance with personalized insights.
 
 ### Community Forums
-![Community Forums](/public/experience/aceup/community.png)
+![Community Forums](readme/community.png)
 A collaborative space for discussions, knowledge sharing, and networking.
 
 ### Backend
-![Database](/public/experience/aceup/database.png)
+![Database](readme/database.png)
 Screenshots showcasing the backend infrastructure.
 
 ## Description Details
