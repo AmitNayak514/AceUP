@@ -65,10 +65,6 @@ Screenshots showcasing the backend infrastructure.
 ![Database](readme/database.png)
 ![Database](readme/database2.png)
 
-## Description Details
-
-### Team Contributions
-At AceUP, our team collaboratively developed a cutting-edge adaptive quiz learning platform designed to enhance student learning experiences. We ensured the system could effectively analyze student performance and provide tailored insights and strategies for improvement.
 
 ### Key Highlights
 - Developed an adaptive quiz learning platform to analyze and enhance student performance.
@@ -83,4 +79,27 @@ At AceUP, our team collaboratively developed a cutting-edge adaptive quiz learni
 1. Clone the repository
    ```bash
    git clone https://github.com/yourusername/aceup-project.git
-   cd aceup-project
+   cd aceup-project```
+
+2. Install dependencies
+   ```bash
+   npm install```
+
+3. Set up the .env similar to envexample file
+
+
+4. Run the development server
+   ```bash
+   npm run dev```
+
+5. Open http://localhost:3000 in your browser.
+
+
+## Contribution
+
+1. Fork the repository.
+2. Create a new branch (git checkout -b feature/your-feature-name).
+3. Make your changes and commit them (git commit -m 'Add some feature').
+4. Push to the branch (git push origin feature/your-feature-name).
+5. Create a new Pull Request.
+
