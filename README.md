@@ -24,38 +24,46 @@ AceUP is an innovative adaptive quiz learning platform designed to analyze stude
 
 ## Project Pages
 
-### Landing Page
-![Landing Page](readme/landing.png)
+### ⭐ Landing Page
 The main entry point for users, providing an overview of the platform's features and benefits.
+![Landing Page](readme/landing.png)
 
-### Authentication Pages
+### 🔑 Authentication Pages
+Pages for user authentication including login, registration, and profile management.
 ![Login Page](readme/login.png)
 ![Register Page](readme/register.png)
-Pages for user authentication including login, registration, and profile management.
+![Manage Profile](readme/manage-profile.png)
 
-### Main Dashboard
+### 📊 Main Dashboard
+Dashboard explaining various features of the application.
 ![Dashboard](readme/dashboard.png)
-A central hub explaining various features of the application.
 
-### Diagnostics Test Page
+### 📋 Diagnostics Test Page
+An initial test to assess the student's current level and performance to help them improve further.
 ![Diagnostics Test](readme/diagnostic.png)
-An initial test to assess the student's current level and performance.
+![Initial Test 1](readme/initialTest1.png)
+![Initial Test 2](readme/initialTest2.png)
 
-### Main Test Page
+### 📝 Main Test Page
+The main interface where students take adaptive quizzes in subjects like DBMS, DSA, and Networking. This page features a user-friendly layout designed to engage students and facilitate effective learning through interactive quizzes tailored to individual progress and knowledge levels.
 ![Main Test](readme/mainTest2.png)
-The main interface for adaptive quizzes in DBMS, DSA, and Networking.
+![Main Test](readme/mainTest3.png)
+![Main Test](readme/mainTest4.png)
 
-### Assessments and Insights
+### 📈 Assessments and Insights
+A comprehensive page that provides students with a detailed evaluation of their quiz performance and personalized insights for improvement. This page includes a thorough breakdown of their answers, highlighting correct and incorrect responses, and offers constructive feedback.
 ![Assessments and Insights](readme/assessment2.png)
-A detailed evaluation of quiz performance with personalized insights.
+![Assessments and Insights](readme/assessment.png)
 
-### Community Forums
+### 💬 Community Forums
+The Community Forums provide a collaborative space for students and educators to engage in discussions, share insights, and seek advice related to their learning journey. It fosters a supportive environment where participants can ask questions, exchange knowledge, and explore diverse perspectives on topics covered in the curriculum. This platform encourages active participation, networking, and community building among users, enhancing the overall learning experience.
 ![Community Forums](readme/community.png)
-A collaborative space for discussions, knowledge sharing, and networking.
+![Community Forums](readme/community2.png)
 
-### Backend
-![Database](readme/database.png)
+### 🔧 Backend
 Screenshots showcasing the backend infrastructure.
+![Database](readme/database.png)
+![Database](readme/database2.png)
 
 ## Description Details
 
